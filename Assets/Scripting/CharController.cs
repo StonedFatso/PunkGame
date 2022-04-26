@@ -9,6 +9,8 @@ public class CharController : MonoBehaviour
     float speed = 4;
     [SerializeField]
     float gravity = 8;
+    //[SerializeField]
+    //float weapon = 0;
 
     Vector3 moveDir = Vector3.zero;
 
@@ -50,7 +52,7 @@ public class CharController : MonoBehaviour
                 moveDir.y -= gravity * Time.deltaTime;
                 if (run)
                 {
-                    anim.SetFloat("Forward", 2);
+                    anim.SetFloat("Forward", v*2);
                 }
                 else
                 {
@@ -61,12 +63,14 @@ public class CharController : MonoBehaviour
         }
     }
 
-    public void Attack()
+    public void Attack(float weapon)
     {
+        anim.SetFloat("method", weapon);
         anim.SetBool("attacking", true);
+
     }
     bool CheckAttack()
     {
-        return anim.GetCurrentAnimatorStateInfo(0).IsName("m_fight_attack_A");
+        return anim.GetCurrentAnimatorStateInfo(0).IsName("AttackTree");
     }
 }

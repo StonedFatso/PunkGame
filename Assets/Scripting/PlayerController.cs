@@ -31,7 +31,7 @@ public class PlayerController : MonoBehaviour
     {
         if (Input.GetMouseButtonDown(0))
         {
-            controller.Attack();
+            controller.Attack(0);
         }
 
         bool shift = Input.GetKeyDown(KeyCode.LeftShift);

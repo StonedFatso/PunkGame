@@ -32,6 +32,6 @@ public class BottleController : MonoBehaviour
     {
         throwed = true;
         target = t;
-        transform.rotation = Quaternion.AngleAxis(93f, new Vector3(0f, 0f, 1f));
+        //transform.rotation = Quaternion.AngleAxis(93f, new Vector3(0f, 0f, 1f));
     }
 }

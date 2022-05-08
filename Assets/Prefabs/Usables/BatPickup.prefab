@@ -10,7 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4413588304682583749}
   - component: {fileID: -6416118130652496690}
-  - component: {fileID: 7361183825122554390}
+  - component: {fileID: 5373889161924414996}
   m_Layer: 0
   m_Name: BatPickup
   m_TagString: Untagged
@@ -46,7 +46,7 @@ SphereCollider:
   serializedVersion: 2
   m_Radius: 0.5518923
   m_Center: {x: 0, y: 0.05189228, z: 0}
---- !u!114 &7361183825122554390
+--- !u!114 &5373889161924414996
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -58,6 +58,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b0e7f3a6da0cb9e47a4a5c7a7da774ae, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  weapon: bat
+  speed: 10
 --- !u!1001 &4257291547483646650
 PrefabInstance:
   m_ObjectHideFlags: 0

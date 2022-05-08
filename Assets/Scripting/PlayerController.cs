@@ -11,10 +11,13 @@ public class PlayerController : MonoBehaviour
     bool run = false;
 
     CharController controller;
+    Weapon weapon;
 
     private void Start()
     {
         controller = GetComponent<CharController>();
+        weapon = GetComponent<Weapon>();
+
     }
 
     private void Update()
@@ -31,7 +34,7 @@ public class PlayerController : MonoBehaviour
     {
         if (Input.GetMouseButtonDown(0))
         {
-            controller.Attack(0);
+            weapon.Attack();
         }
 
         bool shift = Input.GetKeyDown(KeyCode.LeftShift);

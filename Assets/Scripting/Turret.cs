@@ -24,11 +24,9 @@ public class Turret : MonoBehaviour
     {
         if (other.gameObject.CompareTag("Player"))
         {
-            Debug.Log("Trigerred");
             GameObject Player = other.gameObject;
             Vector3 lookat = Player.transform.position - transform.position;
             transform.rotation = Quaternion.LookRotation(new Vector3(lookat.x, 0, lookat.z));
-            Debug.Log(lookat);
         }
     }
 
@@ -45,7 +43,7 @@ public class Turret : MonoBehaviour
                 BottleController thrower = throwable.GetComponent<BottleController>();
                 controller.Attack(2);
                 //thrower.Throw(other.gameObject.transform.position - transform.position);
-                thrower.Throw(other.gameObject.transform.position);
+                thrower.Throw(new Vector3(other.gameObject.transform.position.x, other.gameObject.transform.position.y+1f, other.gameObject.transform.position.z));
                 throwTime = 0;
             }
         }

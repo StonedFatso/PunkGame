@@ -13,6 +13,10 @@ public class Weapon : MonoBehaviour
     private string currentWeapon = "unarmed";
     private int w_Health = 0;
     CharController controller;
+    [SerializeField]
+    private GameObject bottleAmmo;
+    [SerializeField]
+    private Transform cam;
     // Start is called before the first frame update
     private void Start()
     {
@@ -71,6 +75,16 @@ public class Weapon : MonoBehaviour
                 w_Health--;
                 if (w_Health < 1)
                     SetWeapon("unarmed");
+                GameObject throwable = Instantiate(bottleAmmo, transform.position + transform.forward + transform.up * 2f, transform.rotation);
+                BottleController thrower = throwable.GetComponent<BottleController>();
+                if (cam != null)
+                {
+                    thrower.Throw(new Vector3(gameObject.transform.position.x, gameObject.transform.position.y + 1f, gameObject.transform.position.z), cam);
+                }
+                else
+                {
+                    thrower.Throw(new Vector3(gameObject.transform.position.x, gameObject.transform.position.y + 1f, gameObject.transform.position.z));
+                }                
                 break;
         }
     }

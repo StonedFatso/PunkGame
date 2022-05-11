@@ -12,6 +12,8 @@ public class PlayerController : MonoBehaviour
 
     CharController controller;
     Weapon weapon;
+    [SerializeField]
+    Transform cam;
 
     private void Start()
     {
@@ -23,8 +25,8 @@ public class PlayerController : MonoBehaviour
     private void Update()
     {
         GetInput();
-        rotx += Input.GetAxis("Mouse X") * rotSpeed * Time.deltaTime;
-        transform.eulerAngles = new Vector3(0, rotx, 0);
+        //rotx += Input.GetAxis("Mouse X") * rotSpeed * Time.deltaTime;
+        transform.eulerAngles = new Vector3(0, cam.eulerAngles.y, 0);
         v = Input.GetAxis("Vertical");
         controller.Movement(run, v);
 

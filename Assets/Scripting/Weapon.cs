@@ -9,12 +9,15 @@ public class Weapon : MonoBehaviour
         { "unarmed", 0 },
         { "bat", 3 },
         { "bottle", 1 },
+        { "mine", 1 },
     };
     private string currentWeapon = "unarmed";
     private int w_Health = 0;
     CharController controller;
     [SerializeField]
     private GameObject bottleAmmo;
+    [SerializeField]
+    private GameObject mineAmmo;
     [SerializeField]
     private Transform cam;
     // Start is called before the first frame update
@@ -85,6 +88,12 @@ public class Weapon : MonoBehaviour
                 {
                     thrower.Throw(new Vector3(gameObject.transform.position.x, gameObject.transform.position.y + 1f, gameObject.transform.position.z));
                 }                
+                break;
+            case "mine":
+                w_Health--;
+                if (w_Health < 1)
+                    SetWeapon("unarmed");
+                GameObject mine = Instantiate(mineAmmo, transform.position + transform.forward, Quaternion.Euler(0,0,0));
                 break;
         }
     }

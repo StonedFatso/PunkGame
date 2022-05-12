@@ -9,6 +9,8 @@ public class CharController : MonoBehaviour
     float speed = 4;
     [SerializeField]
     float gravity = 8;
+    [SerializeField]
+    float jumpForce = 3f;
     //[SerializeField]
     //float weapon = 0;
 
@@ -16,11 +18,18 @@ public class CharController : MonoBehaviour
 
     CharacterController controller;
     Animator anim;
+    Rigidbody _rigidbody;
+    CapsuleCollider coll;
+    bool isGrounded = false;
+    LayerMask mask;
     // Start is called before the first frame update
     void Start()
     {
         controller = GetComponent<CharacterController>();
         anim = GetComponent<Animator>();
+        _rigidbody = GetComponent<Rigidbody>();
+        coll = GetComponent<CapsuleCollider>();
+        mask = LayerMask.GetMask("StaticLevel");
     }
 
     // Update is called once per frame
@@ -32,10 +41,12 @@ public class CharController : MonoBehaviour
         }
     }
 
-    public void Movement(bool run, float v)
+    /*public void Movement(bool run, float v)
     {
         if (controller.isGrounded)
         {
+            if (anim.GetBool("jump"))
+                anim.SetBool("jump", false);
             moveDir = new Vector3(0, 0, v);
             if (run)
             {
@@ -60,6 +71,61 @@ public class CharController : MonoBehaviour
                 }
                 controller.Move(moveDir * Time.deltaTime);
             }
+        }
+    }*/
+
+    private void OnCollisionStay(Collision other)
+    {
+        if (!isGrounded && (mask.value & (1 << other.gameObject.layer)) > 0)
+        {
+            isGrounded = true;
+            if (anim.GetBool("jump"))
+                anim.SetBool("jump", false);
+        }
+    }
+
+    private void OnCollisionExit(Collision other)
+    {
+        if ((mask.value & (1 << other.gameObject.layer)) > 0)
+        {
+            isGrounded = false;
+        }
+    }
+
+    public void Movement(bool run, float v)
+    {
+        if (!CheckAttack())
+        {
+
+            moveDir = new Vector3(0, 0, v);
+            moveDir = transform.TransformDirection(moveDir);
+
+            if (!moveDir.Equals(new Vector3(0, 0, 0)))
+            {
+                //moveDir.y -= gravity * Time.deltaTime;
+                if (isGrounded)
+                    if (run)
+                    {
+                        anim.SetFloat("Forward", v * 2);
+                    }
+                    else
+                    {
+                        anim.SetFloat("Forward", v);
+                    }
+                if (run && isGrounded)
+                    transform.position = transform.position + moveDir.normalized/15;
+                else
+                    transform.position = transform.position + moveDir.normalized / 30;
+            }
+        }
+    }
+
+    public void Jump(float v)
+    {
+        if (isGrounded)
+        {
+            anim.SetBool("jump", true);
+            _rigidbody.AddForce(Vector3.up * jumpForce, ForceMode.Impulse);
         }
     }
 

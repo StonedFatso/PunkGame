@@ -5,8 +5,8 @@ using UnityEngine;
 public class PlayerController : MonoBehaviour
 {
     [SerializeField]
-    float rotSpeed = 1000;//80;
-    float rotx = 0f;
+    //float rotSpeed = 1000;//80;
+    //float rotx = 0f;
     float v = 0f;
     bool run = false;
 
@@ -27,13 +27,13 @@ public class PlayerController : MonoBehaviour
         GetInput();
         //rotx += Input.GetAxis("Mouse X") * rotSpeed * Time.deltaTime;
         transform.eulerAngles = new Vector3(0, cam.eulerAngles.y, 0);
-        v = Input.GetAxis("Vertical");
         controller.Movement(run, v);
 
     }
 
     void GetInput()
     {
+        v = Input.GetAxis("Vertical");
         if (Input.GetMouseButtonDown(0))
         {
             weapon.Attack();
@@ -44,5 +44,8 @@ public class PlayerController : MonoBehaviour
             run = true;
         else if(Input.GetKeyUp(KeyCode.LeftShift))
             run = false;
+
+        if (Input.GetKeyDown(KeyCode.Space))
+            controller.Jump(v);
     }
 }

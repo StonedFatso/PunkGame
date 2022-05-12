@@ -5,7 +5,7 @@ using UnityEngine;
 public class BottleController : MonoBehaviour
 {
     Rigidbody m_Rigidbody;
-    private bool throwed = false;
+    //private bool throwed = false;
     private Vector3 target;
     [SerializeField]
     public float speed = 10f;
@@ -13,11 +13,11 @@ public class BottleController : MonoBehaviour
     private float lifetime = 20;
     private float timer = 0;
 
-    private Rigidbody rigidbody;
+    private Rigidbody _rigidbody;
 
     private void Awake()
     {
-        rigidbody = GetComponent<Rigidbody>();
+        _rigidbody = GetComponent<Rigidbody>();
     }
 
     // Update is called once per frame
@@ -37,19 +37,19 @@ public class BottleController : MonoBehaviour
 
     public void Throw(Vector3 t)
     {
-        throwed = true;
+        //throwed = true;
         target = t;
         Vector3 dir = (target - transform.position).normalized;
-        rigidbody.AddForce(dir * speed, ForceMode.Impulse);
+        _rigidbody.AddForce(dir * speed, ForceMode.Impulse);
         //transform.rotation = Quaternion.AngleAxis(93f, new Vector3(0f, 0f, 1f));
     }
 
     public void Throw(Vector3 t, Transform cam)
     {
-        throwed = true;
+        //throwed = true;
         target = t;
         Vector3 dir = cam.forward;
-        rigidbody.AddForce(dir * speed, ForceMode.Impulse);
+        _rigidbody.AddForce(dir * speed, ForceMode.Impulse);
         //transform.rotation = Quaternion.AngleAxis(93f, new Vector3(0f, 0f, 1f));
     }
 }

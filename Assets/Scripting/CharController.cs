@@ -19,7 +19,8 @@ public class CharController : MonoBehaviour
     CharacterController controller;
     Animator anim;
     Rigidbody _rigidbody;
-    CapsuleCollider coll;
+    //CapsuleCollider coll;
+    BoxCollider coll;
     bool isGrounded = false;
     LayerMask mask;
     // Start is called before the first frame update
@@ -28,7 +29,8 @@ public class CharController : MonoBehaviour
         controller = GetComponent<CharacterController>();
         anim = GetComponent<Animator>();
         _rigidbody = GetComponent<Rigidbody>();
-        coll = GetComponent<CapsuleCollider>();
+        //coll = GetComponent<CapsuleCollider>();
+        coll = GetComponent<BoxCollider>();
         mask = LayerMask.GetMask("StaticLevel");
     }
 
@@ -76,7 +78,7 @@ public class CharController : MonoBehaviour
 
     private void OnCollisionStay(Collision other)
     {
-        if (!isGrounded && (mask.value & (1 << other.gameObject.layer)) > 0)
+        if (!isGrounded) //&& (mask.value & (1 << other.gameObject.layer)) > 0)
         {
             isGrounded = true;
             if (anim.GetBool("jump"))
@@ -86,10 +88,10 @@ public class CharController : MonoBehaviour
 
     private void OnCollisionExit(Collision other)
     {
-        if ((mask.value & (1 << other.gameObject.layer)) > 0)
-        {
+        //if ((mask.value & (1 << other.gameObject.layer)) > 0)
+        //{
             isGrounded = false;
-        }
+        //}
     }
 
     public void Movement(bool run, float v)
@@ -107,16 +109,35 @@ public class CharController : MonoBehaviour
                     if (run)
                     {
                         anim.SetFloat("Forward", v * 2);
+                        transform.position = transform.position + moveDir.normalized / 15;
+                    }
+                    else
+                    {
+                        anim.SetFloat("Forward", v);
+                        transform.position = transform.position + moveDir.normalized / 30;
+                    }
+                //if (run && isGrounded)
+                    //transform.position = transform.position + moveDir.normalized/15;
+                //else
+                    //transform.position = transform.position + moveDir.normalized / 30;
+            }
+        }
+    }
+
+    public void AnimMovement(bool run, float v)
+    {
+        if (!CheckAttack())
+        {
+            //moveDir.y -= gravity * Time.deltaTime;
+            if (isGrounded)
+                if (run)
+                    {
+                        anim.SetFloat("Forward", v * 2);
                     }
                     else
                     {
                         anim.SetFloat("Forward", v);
                     }
-                if (run && isGrounded)
-                    transform.position = transform.position + moveDir.normalized/15;
-                else
-                    transform.position = transform.position + moveDir.normalized / 30;
-            }
         }
     }
 

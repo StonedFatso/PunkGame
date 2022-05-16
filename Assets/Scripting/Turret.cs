@@ -51,6 +51,8 @@ public class Turret : MonoBehaviour
 
     private void Update()
     {
-        throwTime = throwTime + Time.deltaTime;
+        if (throwTime < throwSpeed)
+            throwTime = throwTime + Time.deltaTime;
+        controller.AnimMovement(false, 0);
     }
 }

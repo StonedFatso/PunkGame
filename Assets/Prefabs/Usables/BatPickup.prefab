@@ -11,6 +11,7 @@ GameObject:
   - component: {fileID: 4413588304682583749}
   - component: {fileID: -6416118130652496690}
   - component: {fileID: 5373889161924414996}
+  - component: {fileID: 2073543934309175654}
   m_Layer: 0
   m_Name: BatPickup
   m_TagString: Untagged
@@ -26,13 +27,13 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 7502823213970788151}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 4.252, y: -2.41, z: -0.91}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 4257291547484041274}
   m_Father: {fileID: 0}
   m_RootOrder: 0
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 35.46721, z: 0}
 --- !u!135 &-6416118130652496690
 SphereCollider:
   m_ObjectHideFlags: 0
@@ -60,6 +61,22 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   weapon: bat
   speed: 10
+--- !u!111 &2073543934309175654
+Animation:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7502823213970788151}
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Animation: {fileID: 7400000, guid: 80c689a9dad143642af98dd3f78cb598, type: 2}
+  m_Animations:
+  - {fileID: 7400000, guid: 80c689a9dad143642af98dd3f78cb598, type: 2}
+  m_WrapMode: 0
+  m_PlayAutomatically: 1
+  m_AnimatePhysics: 0
+  m_CullingType: 0
 --- !u!1001 &4257291547483646650
 PrefabInstance:
   m_ObjectHideFlags: 0

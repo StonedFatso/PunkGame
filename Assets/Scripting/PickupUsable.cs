@@ -25,7 +25,7 @@ public class PickupUsable : MonoBehaviour
     }
 
     // Update is called once per frame
-    void Update()
+    /*void Update()
     {
         //transform.rotation = Quaternion.Euler(0f, , 0f);
         if (eulery < 360)
@@ -34,5 +34,5 @@ public class PickupUsable : MonoBehaviour
             eulery = 0;
 
         transform.eulerAngles = new Vector3(0, eulery, 0);
-    }
+    }*/
 }

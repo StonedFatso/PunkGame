@@ -11,6 +11,7 @@ GameObject:
   - component: {fileID: 4272818178712508516}
   - component: {fileID: 1024962909786127994}
   - component: {fileID: 5337729235133139056}
+  - component: {fileID: -7832046744001405816}
   m_Layer: 0
   m_Name: MinePickup
   m_TagString: Untagged
@@ -60,6 +61,22 @@ SphereCollider:
   serializedVersion: 2
   m_Radius: 0.5
   m_Center: {x: 0, y: 0, z: 0}
+--- !u!111 &-7832046744001405816
+Animation:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4669950255277653694}
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Animation: {fileID: 7400000, guid: 80c689a9dad143642af98dd3f78cb598, type: 2}
+  m_Animations:
+  - {fileID: 7400000, guid: 80c689a9dad143642af98dd3f78cb598, type: 2}
+  m_WrapMode: 0
+  m_PlayAutomatically: 1
+  m_AnimatePhysics: 0
+  m_CullingType: 0
 --- !u!1 &4977286819786705735
 GameObject:
   m_ObjectHideFlags: 0

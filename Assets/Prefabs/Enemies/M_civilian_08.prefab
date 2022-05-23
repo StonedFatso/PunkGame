@@ -6808,7 +6808,9 @@ GameObject:
   - component: {fileID: -7487241287345500367}
   - component: {fileID: -7838027130862168212}
   - component: {fileID: -9058243341579097805}
-  m_Layer: 0
+  - component: {fileID: 3914906958498971087}
+  - component: {fileID: 303576827735896333}
+  m_Layer: 8
   m_Name: M_civilian_08
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -6946,6 +6948,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   speed: 4
   gravity: 8
+  jumpForce: 3
 --- !u!114 &-9058243341579097805
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -6958,6 +6961,34 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 54cfbe611b7fa2c4a8b0e65408d7d580, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  v: 0
+--- !u!114 &3914906958498971087
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 159172}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4aab8b602bd73ce40842b0b67789db9f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  health: 100
+--- !u!136 &303576827735896333
+CapsuleCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 159172}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_Enabled: 1
+  m_Radius: 0.5
+  m_Height: 1.6
+  m_Direction: 1
+  m_Center: {x: 0, y: 0.8, z: 0}
 --- !u!1 &159626
 GameObject:
   m_ObjectHideFlags: 0

@@ -20,10 +20,13 @@ public class Weapon : MonoBehaviour
     private GameObject mineAmmo;
     [SerializeField]
     private Transform cam;
+    private Health enemy;
+    private LayerMask mask;
     // Start is called before the first frame update
     private void Start()
     {
         controller = GetComponent<CharController>();
+        mask = LayerMask.GetMask("People");
     }
 
     private GameObject GetChildByName(GameObject entObj, string name)
@@ -54,11 +57,42 @@ public class Weapon : MonoBehaviour
                 GameObject w_obj = GetChildByName(gameObject, weapon);
                 w_obj.GetComponent<MeshRenderer>().enabled = true;
             }
+            currentWeapon = weapon;
+            w_Health = weaponList[weapon];
         }
+        else
+        {
+            switch (weapon)
+            {
+                case "bat":
+                    w_Health = weaponList["bat"];
+                    break;
+                case "bottle":
+                    w_Health++;
+                    break;
+                case "mine":
+                    w_Health++;
+                    break;
+            }
+        }
+    }
 
-        currentWeapon = weapon;
-        w_Health = weaponList[weapon];
-    }    
+    private void OnTriggerEnter(Collider other)
+    {
+        if ((mask.value & (1 << other.gameObject.layer)) > 0)
+        {
+            enemy = other.gameObject.GetComponent<Health>();
+            Debug.Log(enemy != null);
+        }
+    }
+
+    private void OnTriggerExit(Collider other)
+    {
+        if ((mask.value & (1 << other.gameObject.layer)) > 0)
+        {
+            enemy = null;
+        }
+    }
 
     public void Attack()
     {
@@ -66,10 +100,15 @@ public class Weapon : MonoBehaviour
         {
             case "unarmed":
                 controller.Attack(0);
+                enemy.Injury(5);
                 break;
             case "bat":
                 controller.Attack(1);
-                w_Health--;
+                if (enemy != null)
+                {
+                    w_Health--;
+                    enemy.Injury(10);
+                }
                 if (w_Health < 1)
                     SetWeapon("unarmed");
                 break;

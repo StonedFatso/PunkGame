@@ -4608,7 +4608,9 @@ GameObject:
   - component: {fileID: 8565459941125202314}
   - component: {fileID: -9114536508371161830}
   - component: {fileID: -8621666373345178295}
-  m_Layer: 7
+  - component: {fileID: -2172032335167770248}
+  - component: {fileID: -1053858599436862421}
+  m_Layer: 8
   m_Name: M_police_01
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -4768,8 +4770,8 @@ CapsuleCollider:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 133092}
   m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 0
+  m_IsTrigger: 1
+  m_Enabled: 1
   m_Radius: 0.5
   m_Height: 1.6
   m_Direction: 1
@@ -4822,6 +4824,34 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 0.5, y: 1.6, z: 0.5}
   m_Center: {x: 0, y: 0.7, z: 0}
+--- !u!114 &-2172032335167770248
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 133092}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4aab8b602bd73ce40842b0b67789db9f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  health: 100
+--- !u!114 &-1053858599436862421
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 133092}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 67a28610ff0d6a74d9725154d9ca9e3e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  bottleAmmo: {fileID: 0}
+  mineAmmo: {fileID: 0}
+  cam: {fileID: 0}
 --- !u!1 &134902
 GameObject:
   m_ObjectHideFlags: 0

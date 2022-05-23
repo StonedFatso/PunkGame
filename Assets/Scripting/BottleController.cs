@@ -14,10 +14,12 @@ public class BottleController : MonoBehaviour
     private float timer = 0;
 
     private Rigidbody _rigidbody;
+    private LayerMask mask;
 
     private void Awake()
     {
         _rigidbody = GetComponent<Rigidbody>();
+        mask = LayerMask.GetMask("People");
     }
 
     // Update is called once per frame
@@ -33,6 +35,14 @@ public class BottleController : MonoBehaviour
 
         if (timer >= lifetime)
             Object.Destroy(gameObject);
+    }
+
+    private void OnTriggerEnter(Collider other)
+    {
+        if ((mask.value & (1 << other.gameObject.layer)) > 0)
+        {
+            other.gameObject.GetComponent<Health>().Injury(15);
+        }
     }
 
     public void Throw(Vector3 t)

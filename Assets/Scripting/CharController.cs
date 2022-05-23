@@ -23,6 +23,7 @@ public class CharController : MonoBehaviour
     BoxCollider coll;
     bool isGrounded = false;
     LayerMask mask;
+    private bool isDead = false;
     // Start is called before the first frame update
     void Start()
     {
@@ -40,6 +41,11 @@ public class CharController : MonoBehaviour
         if (anim.GetBool("attacking") && CheckAttack())
         {
             anim.SetBool("attacking", false);
+        }
+
+        if (anim.GetBool("damage") && CheckDamage())
+        {
+            anim.SetBool("damage", false);
         }
     }
 
@@ -96,7 +102,7 @@ public class CharController : MonoBehaviour
 
     public void Movement(bool run, float v)
     {
-        if (!CheckAttack())
+        if (!isDead && !CheckAttack())
         {
 
             moveDir = new Vector3(0, 0, v);
@@ -152,12 +158,35 @@ public class CharController : MonoBehaviour
 
     public void Attack(float weapon)
     {
-        anim.SetFloat("method", weapon);
-        anim.SetBool("attacking", true);
+        if (!isDead)
+        {
+            anim.SetFloat("method", weapon);
+            anim.SetBool("attacking", true);
+        }
 
     }
+
+    public void Damage()
+    {
+        if (!isDead)
+            anim.SetBool("damage", true);
+
+    }
+
+    public void Death()
+    {
+        anim.SetBool("death", true);
+        isDead = true;
+
+    }
+
     bool CheckAttack()
     {
         return anim.GetCurrentAnimatorStateInfo(0).IsName("AttackTree");
+    }
+
+    bool CheckDamage()
+    {
+        return anim.GetCurrentAnimatorStateInfo(0).IsName("Damage");
     }
 }

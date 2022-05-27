@@ -100,7 +100,8 @@ public class Weapon : MonoBehaviour
         {
             case "unarmed":
                 controller.Attack(0);
-                enemy.Injury(5);
+                if (enemy != null)
+                    enemy.Injury(5);
                 break;
             case "bat":
                 controller.Attack(1);

@@ -37,7 +37,7 @@ public class BottleController : MonoBehaviour
             Object.Destroy(gameObject);
     }
 
-    private void OnTriggerEnter(Collider other)
+    private void OnCollisionEnter(Collision other)
     {
         if ((mask.value & (1 << other.gameObject.layer)) > 0)
         {

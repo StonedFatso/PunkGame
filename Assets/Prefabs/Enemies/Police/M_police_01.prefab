@@ -4837,6 +4837,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   health: 100
+  isDead: 0
 --- !u!114 &-1053858599436862421
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -4849,8 +4850,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 67a28610ff0d6a74d9725154d9ca9e3e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  bottleAmmo: {fileID: 0}
-  mineAmmo: {fileID: 0}
+  bottleAmmo: {fileID: 5874389436449035894, guid: 60a5c8d5bde987941b9282d27a5e0447, type: 3}
+  mineAmmo: {fileID: 5370272548913045720, guid: 9af05e3f6e5181b49ab214e5e1db03b8, type: 3}
   cam: {fileID: 0}
 --- !u!1 &134902
 GameObject:

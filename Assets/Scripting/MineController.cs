@@ -36,7 +36,8 @@ public class MineController : MonoBehaviour
             GameObject obj = peopleHits[i].collider.gameObject;
             obj.GetComponent<Rigidbody>().AddForce((obj.transform.position - p1) * 1.5f, ForceMode.Impulse);
             enemy = foot.gameObject.GetComponent<Health>();
-            enemy.Injury(50);
+            if (enemy != null)
+                enemy.Injury(50);
         }
         Destroy(gameObject);
     }

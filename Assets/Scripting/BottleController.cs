@@ -15,11 +15,14 @@ public class BottleController : MonoBehaviour
 
     private Rigidbody _rigidbody;
     private LayerMask mask;
+    private LayerMask levelMask;
+    private bool canDamage = true;
 
     private void Awake()
     {
         _rigidbody = GetComponent<Rigidbody>();
         mask = LayerMask.GetMask("People");
+        levelMask = LayerMask.GetMask("StaticLevel");
     }
 
     // Update is called once per frame
@@ -39,10 +42,15 @@ public class BottleController : MonoBehaviour
 
     private void OnCollisionEnter(Collision other)
     {
-        if ((mask.value & (1 << other.gameObject.layer)) > 0)
+        if ((levelMask.value & (1 << other.gameObject.layer)) > 0)
+        {
+            canDamage = false;
+        }
+        if (canDamage && (mask.value & (1 << other.gameObject.layer)) > 0)
         {
             other.gameObject.GetComponent<Health>().Injury(15);
         }
+
     }
 
     public void Throw(Vector3 t)

@@ -16,10 +16,10 @@ public class EnemySpawner : MonoBehaviour
 
     public GameObject[] SpawnEnemies()
     {
+        System.Random rnd = new System.Random();
         GameObject[] SpawnedEnemies = new GameObject[SpawnPoints.Length];
         for (int i = 0; i < SpawnPoints.Length; i++)
-        {
-            System.Random rnd = new System.Random();
+        {         
             GameObject Enemy = Enemies[rnd.Next(0, Enemies.Length-1)];
             SpawnedEnemies[i] = Instantiate(Enemy, SpawnPoints[i].position, SpawnPoints[i].rotation);
         }

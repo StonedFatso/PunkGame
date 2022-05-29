@@ -7957,7 +7957,7 @@ GameObject:
   - component: {fileID: -8161904604504995951}
   - component: {fileID: 8361938103627691829}
   - component: {fileID: 7499067072280454283}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: hooligan
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -8072,7 +8072,7 @@ SphereCollider:
   m_IsTrigger: 1
   m_Enabled: 1
   serializedVersion: 2
-  m_Radius: 15
+  m_Radius: 10
   m_Center: {x: -2.12, y: 0, z: 0}
 --- !u!54 &-7842101719003679074
 Rigidbody:

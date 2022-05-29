@@ -7,7 +7,7 @@ public class Weapon : MonoBehaviour
     private Dictionary<string, int> weaponList = new Dictionary<string, int>()
     { 
         { "unarmed", 0 },
-        { "bat", 3 },
+        { "bat", 10 },
         { "bottle", 1 },
         { "mine", 1 },
     };
@@ -22,11 +22,13 @@ public class Weapon : MonoBehaviour
     private Transform cam;
     private Health enemy;
     private LayerMask mask;
+    private GameObject canvas;
     // Start is called before the first frame update
     private void Start()
     {
         controller = GetComponent<CharController>();
         mask = LayerMask.GetMask("People");
+        canvas = GameObject.FindWithTag("AimOverlay");
     }
 
     private GameObject GetChildByName(GameObject entObj, string name)
@@ -57,6 +59,8 @@ public class Weapon : MonoBehaviour
                 GameObject w_obj = GetChildByName(gameObject, weapon);
                 w_obj.GetComponent<MeshRenderer>().enabled = true;
             }
+            if (canvas != null)
+                canvas.GetComponent<Canvas>().enabled = weapon == "bottle";
             currentWeapon = weapon;
             w_Health = weaponList[weapon];
         }
@@ -82,7 +86,6 @@ public class Weapon : MonoBehaviour
         if ((mask.value & (1 << other.gameObject.layer)) > 0)
         {
             enemy = other.gameObject.GetComponent<Health>();
-            Debug.Log(enemy != null);
         }
     }
 
@@ -108,7 +111,7 @@ public class Weapon : MonoBehaviour
                 if (enemy != null)
                 {
                     w_Health--;
-                    enemy.Injury(10);
+                    enemy.Injury(20);
                 }
                 if (w_Health < 1)
                     SetWeapon("unarmed");

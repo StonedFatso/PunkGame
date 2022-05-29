@@ -8442,7 +8442,7 @@ GameObject:
   - component: {fileID: 3476545400897789261}
   - component: {fileID: -2086886595020497273}
   - component: {fileID: 4077932651003116843}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: skin2
   m_TagString: Untagged
   m_Icon: {fileID: 0}

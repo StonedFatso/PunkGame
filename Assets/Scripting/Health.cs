@@ -1,33 +1,41 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
 public class Health : MonoBehaviour
 {
-    public int health = 100;
+
+    [SerializeField] private float maxHealth = 100;
+    private float _health;
     // Start is called before the first frame update
     CharController controller;
-    public bool isDead = false;
-    private void Start()
+    private bool _isDead = false;
+    public Action<float> HealthChanged;
+
+    public bool IsDead { get => _isDead; }
+    public float CurrentHealth { get => _health; }
+    private void Awake()
     {
         controller = gameObject.GetComponent<CharController>();
+        _health = maxHealth;
     }
 
     public void Injury(int amount)
     {
-        int newH = health - amount;
-        if (newH < 0)
+        _health -= amount;
+        if (CurrentHealth <= 0)
         {
-            newH = 0;
-            health = newH;
+            _health = 0;
+            HealthChanged?.Invoke(_health);
             controller.Death();
-            isDead = true;
+            _isDead = true;
         }
         else
         {
-            health = newH;
+            HealthChanged?.Invoke(_health);
             controller.Damage();
         }
-        Debug.Log(health);
+        Debug.Log(CurrentHealth);
     }
 }

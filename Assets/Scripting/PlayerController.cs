@@ -29,7 +29,7 @@ public class PlayerController : MonoBehaviour
 
     private void Update()
     {
-        if (!health.isDead)
+        if (!health.IsDead)
         {
             GetInput();
             //rotx += Input.GetAxis("Mouse X") * rotSpeed * Time.deltaTime;

@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -13,6 +14,7 @@ public class Weapon : MonoBehaviour
     };
     private string currentWeapon = "unarmed";
     private int w_Health = 0;
+    public float Ammo { get => w_Health; }
     CharController controller;
     [SerializeField]
     private GameObject bottleAmmo;
@@ -23,6 +25,7 @@ public class Weapon : MonoBehaviour
     private Health enemy;
     private LayerMask mask;
     private GameObject canvas;
+    public Action<int> AmmoChanged;
     // Start is called before the first frame update
     private void Start()
     {
@@ -79,6 +82,10 @@ public class Weapon : MonoBehaviour
                     break;
             }
         }
+        if (weapon != "bottle")
+            AmmoChanged?.Invoke(0);
+        else
+            AmmoChanged?.Invoke(w_Health);
     }
 
     private void OnTriggerEnter(Collider other)
@@ -121,6 +128,7 @@ public class Weapon : MonoBehaviour
                 w_Health--;
                 if (w_Health < 1)
                     SetWeapon("unarmed");
+                AmmoChanged?.Invoke(w_Health);
                 GameObject throwable = Instantiate(bottleAmmo, transform.position + transform.forward + transform.up * 2f, transform.rotation);
                 BottleController thrower = throwable.GetComponent<BottleController>();
                 if (cam != null)

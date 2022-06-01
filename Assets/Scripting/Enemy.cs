@@ -31,7 +31,7 @@ public class Enemy : MonoBehaviour
 
     void OnTriggerStay(Collider other)
     {
-        if (!health.isDead)
+        if (!health.IsDead)
             if (other.gameObject.CompareTag("Player"))
             {
                 Player = other.gameObject;
@@ -68,7 +68,7 @@ public class Enemy : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (!health.isDead)
+        if (!health.IsDead)
         {
             if (!_agent.pathPending && _agent.remainingDistance > _agent.stoppingDistance + 0.5f)
             {
@@ -86,7 +86,7 @@ public class Enemy : MonoBehaviour
                 if (attackTime >= attackSpeed)
                 {
                     Health pHealth = Player.GetComponent<Health>();
-                    if (!pHealth.isDead)
+                    if (!pHealth.IsDead)
                     {
                         weapon.Attack();
                         attackTime = 0;

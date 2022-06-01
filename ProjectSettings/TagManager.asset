@@ -6,6 +6,7 @@ TagManager:
   tags:
   - PlayerCamera
   - AimOverlay
+  - UICanvas
   layers:
   - Default
   - TransparentFX

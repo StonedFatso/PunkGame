@@ -1,7 +1,9 @@
 using System;
+using System.Timers;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class Health : MonoBehaviour
 {
@@ -12,9 +14,10 @@ public class Health : MonoBehaviour
     CharController controller;
     private bool _isDead = false;
     public Action<float> HealthChanged;
-
+    private bool restartGame = false;
     public bool IsDead { get => _isDead; }
     public float CurrentHealth { get => _health; }
+    private static Timer aTimer;
     private void Awake()
     {
         controller = gameObject.GetComponent<CharController>();
@@ -23,19 +26,74 @@ public class Health : MonoBehaviour
 
     public void Injury(int amount)
     {
-        _health -= amount;
-        if (CurrentHealth <= 0)
+        if (!_isDead)
         {
-            _health = 0;
-            HealthChanged?.Invoke(_health);
-            controller.Death();
-            _isDead = true;
+            _health -= amount;
+            if (CurrentHealth <= 0)
+            {
+                Death();
+            }
+            else
+            {
+                HealthChanged?.Invoke(_health);
+                controller.Damage();
+            }
+            Debug.Log(CurrentHealth);
         }
-        else
+    }
+
+    public void Cure(int amount)
+    {
+        if (!_isDead)
         {
+            
+            if (CurrentHealth < 100)
+            {
+                if (amount < 100 - _health)
+                {
+                    _health += amount;
+                }
+                else
+                {
+                    _health = 100;
+                }
+            }
             HealthChanged?.Invoke(_health);
-            controller.Damage();
+            Debug.Log(CurrentHealth);
         }
-        Debug.Log(CurrentHealth);
+    }
+
+    private void Death()
+    {
+        _health = 0;
+        HealthChanged?.Invoke(_health);
+        controller.Death();
+        _isDead = true;
+        if (gameObject.CompareTag("Player"))
+        {
+            Debug.Log("Start timer");
+            aTimer = new Timer(3000);
+            aTimer.Elapsed += LoadStartScene;
+            aTimer.AutoReset = true;
+            aTimer.Enabled = true;
+        }
+        
+    }
+
+    private void LoadStartScene(System.Object source, ElapsedEventArgs e)
+    {
+        Debug.Log("End timer");
+        aTimer.Stop();
+        aTimer.Dispose();
+        Debug.Log("LoadScene");
+        restartGame = true;
+    }
+
+    private void Update()
+    {
+        if (restartGame)
+        {
+            SceneManager.LoadScene(0);
+        }
     }
 }

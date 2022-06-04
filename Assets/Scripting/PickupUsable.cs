@@ -1,3 +1,4 @@
+using System.Timers;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -5,22 +6,46 @@ using UnityEngine;
 public class PickupUsable : MonoBehaviour
 {
     [SerializeField]
-    string weapon;
+    private string weapon;
     [SerializeField]
-    float speed = 10f;
-    // Start is called before the first frame update
+    private string item;
+    [SerializeField]
+    private int cureAmount = 30;
+    [SerializeField]
+    private float speed = 10f;
+    [SerializeField]
+    private bool restore = false;
+    [SerializeField]
+    private double restoreSeconds = 30;
+
+
     private float eulery = 0;
-    void Start()
-    {
-        
-    }
 
     void OnTriggerEnter(Collider other)
     {
         if (other.gameObject.CompareTag("Player"))
         {
-            other.gameObject.GetComponent<Weapon>().SetWeapon(weapon);
-            Object.Destroy(gameObject);
+            if (weapon.Length > 0)
+            {
+                Debug.Log("WEAPON PICKUP");
+                other.gameObject.GetComponent<Weapon>().SetWeapon(weapon);
+                Object.Destroy(gameObject);
+            }
+            else if (item.Length > 0)
+            {
+                Debug.Log("ITEM PICKUP");
+                switch (item)
+                {
+                    case "health":
+                        other.gameObject.GetComponent<Health>().Cure(cureAmount);
+                        break;
+                    case "booze":
+
+                        break;
+                }
+                Object.Destroy(gameObject);
+            }
+            
         }
     }
 

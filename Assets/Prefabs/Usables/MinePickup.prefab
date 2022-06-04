@@ -46,7 +46,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b0e7f3a6da0cb9e47a4a5c7a7da774ae, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  weapon: 
+  weapon: mine
+  item: 
   speed: 100
 --- !u!135 &5337729235133139056
 SphereCollider:

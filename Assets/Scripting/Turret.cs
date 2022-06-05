@@ -43,7 +43,7 @@ public class Turret : MonoBehaviour
                 BottleController thrower = throwable.GetComponent<BottleController>();
                 controller.Attack(2);
                 //thrower.Throw(other.gameObject.transform.position - transform.position);
-                thrower.Throw(new Vector3(other.gameObject.transform.position.x, other.gameObject.transform.position.y+1f, other.gameObject.transform.position.z));
+                thrower.Throw(new Vector3(other.gameObject.transform.position.x, other.gameObject.transform.position.y+1f, other.gameObject.transform.position.z), 1);
                 throwTime = 0;
             }
         }

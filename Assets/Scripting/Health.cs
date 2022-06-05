@@ -18,13 +18,16 @@ public class Health : MonoBehaviour
     public bool IsDead { get => _isDead; }
     public float CurrentHealth { get => _health; }
     private static Timer aTimer;
+    private AudioSource[] audioSources;
+
     private void Awake()
     {
+        audioSources = GetComponents<AudioSource>();
         controller = gameObject.GetComponent<CharController>();
         _health = maxHealth;
     }
 
-    public void Injury(int amount)
+    public void Injury(float amount)
     {
         if (!_isDead)
         {
@@ -39,10 +42,11 @@ public class Health : MonoBehaviour
                 controller.Damage();
             }
             Debug.Log(CurrentHealth);
+            audioSources[1].Play();
         }
     }
 
-    public void Cure(int amount)
+    public void Cure(float amount)
     {
         if (!_isDead)
         {

@@ -57,7 +57,7 @@ public class PlayerController : MonoBehaviour
             run = true;
         else if(Input.GetKeyUp(KeyCode.LeftShift))
             run = false;
-        if (Input.GetKeyDown(KeyCode.Space))
-            controller.Jump(v);
+        //if (Input.GetKeyDown(KeyCode.Space))
+            //controller.Jump(v);
     }
 }

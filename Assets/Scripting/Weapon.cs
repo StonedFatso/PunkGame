@@ -5,7 +5,7 @@ using UnityEngine;
 
 public class Weapon : MonoBehaviour
 {
-    private Dictionary<string, int> weaponList = new Dictionary<string, int>()
+    private Dictionary<string, int> weaponHealthList = new Dictionary<string, int>()
     { 
         { "unarmed", 0 },
         { "bat", 10 },
@@ -14,7 +14,6 @@ public class Weapon : MonoBehaviour
     };
     private string currentWeapon = "unarmed";
     private int w_Health = 0;
-    public float Ammo { get => w_Health; }
     CharController controller;
     [SerializeField]
     private GameObject bottleAmmo;
@@ -22,10 +21,15 @@ public class Weapon : MonoBehaviour
     private GameObject mineAmmo;
     [SerializeField]
     private Transform cam;
+    [SerializeField]
+    private float strength = 1;
     private Health enemy;
     private LayerMask mask;
     private GameObject canvas;
     public Action<int> AmmoChanged;
+
+    public float Ammo { get => w_Health; }
+
     // Start is called before the first frame update
     private void Start()
     {
@@ -65,14 +69,14 @@ public class Weapon : MonoBehaviour
             if (canvas != null)
                 canvas.GetComponent<Canvas>().enabled = weapon == "bottle";
             currentWeapon = weapon;
-            w_Health = weaponList[weapon];
+            w_Health = weaponHealthList[weapon];
         }
         else
         {
             switch (weapon)
             {
                 case "bat":
-                    w_Health = weaponList["bat"];
+                    w_Health = weaponHealthList["bat"];
                     break;
                 case "bottle":
                     w_Health++;
@@ -90,7 +94,7 @@ public class Weapon : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        if ((mask.value & (1 << other.gameObject.layer)) > 0)
+        if ((mask.value & (1 << other.gameObject.layer)) > 0 && other.gameObject != gameObject)
         {
             enemy = other.gameObject.GetComponent<Health>();
         }
@@ -98,7 +102,7 @@ public class Weapon : MonoBehaviour
 
     private void OnTriggerExit(Collider other)
     {
-        if ((mask.value & (1 << other.gameObject.layer)) > 0)
+        if ((mask.value & (1 << other.gameObject.layer)) > 0 && other.gameObject != gameObject)
         {
             enemy = null;
         }
@@ -111,14 +115,14 @@ public class Weapon : MonoBehaviour
             case "unarmed":
                 controller.Attack(0);
                 if (enemy != null)
-                    enemy.Injury(5);
+                    enemy.Injury(Mathf.Floor(5 * strength));
                 break;
             case "bat":
                 controller.Attack(1);
                 if (enemy != null)
                 {
                     w_Health--;
-                    enemy.Injury(20);
+                    enemy.Injury(Mathf.Floor(20 * strength));
                 }
                 if (w_Health < 1)
                     SetWeapon("unarmed");
@@ -133,11 +137,11 @@ public class Weapon : MonoBehaviour
                 BottleController thrower = throwable.GetComponent<BottleController>();
                 if (cam != null)
                 {
-                    thrower.Throw(new Vector3(gameObject.transform.position.x, gameObject.transform.position.y + 1f, gameObject.transform.position.z), cam);
+                    thrower.Throw(new Vector3(gameObject.transform.position.x, gameObject.transform.position.y + 1f, gameObject.transform.position.z), cam, strength);
                 }
                 else
                 {
-                    thrower.Throw(new Vector3(gameObject.transform.position.x, gameObject.transform.position.y + 1f, gameObject.transform.position.z));
+                    thrower.Throw(new Vector3(gameObject.transform.position.x, gameObject.transform.position.y + 1f, gameObject.transform.position.z), strength);
                 }                
                 break;
             case "mine":

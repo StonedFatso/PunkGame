@@ -17,9 +17,11 @@ public class Enemy : MonoBehaviour
     private float attackTime = 0;
     Weapon weapon;
     GameObject Player;
+    HumanClass _myClass;
 
     CharController controller;
     Health health;
+    private LayerMask mask;
     // Start is called before the first frame update
     void Awake()
     {
@@ -27,19 +29,27 @@ public class Enemy : MonoBehaviour
         _agent = GetComponent<NavMeshAgent>();
         weapon = GetComponent<Weapon>();
         health = GetComponent<Health>();
+        mask = LayerMask.GetMask("People");
+        _myClass = GetComponent<HumanClass>();
     }
 
     void OnTriggerStay(Collider other)
     {
         if (!health.IsDead)
             if (other.gameObject.CompareTag("Player"))
+            //if ((mask.value & (1 << other.gameObject.layer)) > 0)
             {
                 Player = other.gameObject;
-                //Vector3 lookat = Player.transform.position - transform.position;
-                //transform.rotation = Quaternion.LookRotation(new Vector3(lookat.x, 0, lookat.z));
-                _agent.destination = Player.transform.position;
-                if (v == 0)
-                    v = 2f;
+                //Debug.Log(Player.GetComponent<HumanClass>().Class);
+                //Debug.Log(_myClass.Class);
+                //if (Player.GetComponent<HumanClass>().Class != _myClass.Class)
+                //{ 
+                    //Vector3 lookat = Player.transform.position - transform.position;
+                    //transform.rotation = Quaternion.LookRotation(new Vector3(lookat.x, 0, lookat.z));
+                    _agent.destination = Player.transform.position;
+                    if (v == 0)
+                        v = 2f;
+                //}
             }
     }
 

@@ -17,6 +17,7 @@ public class BottleController : MonoBehaviour
     private LayerMask mask;
     private LayerMask levelMask;
     private bool canDamage = true;
+    private float _strength = 1;
 
     private void Awake()
     {
@@ -48,23 +49,25 @@ public class BottleController : MonoBehaviour
         }
         if (canDamage && (mask.value & (1 << other.gameObject.layer)) > 0)
         {
-            other.gameObject.GetComponent<Health>().Injury(15);
+            other.gameObject.GetComponent<Health>().Injury(15 * _strength);
         }
 
     }
 
-    public void Throw(Vector3 t)
+    public void Throw(Vector3 t, float strength)
     {
         //throwed = true;
+        _strength = strength;
         target = t;
         Vector3 dir = (target - transform.position).normalized;
         _rigidbody.AddForce(dir * speed, ForceMode.Impulse);
         //transform.rotation = Quaternion.AngleAxis(93f, new Vector3(0f, 0f, 1f));
     }
 
-    public void Throw(Vector3 t, Transform cam)
+    public void Throw(Vector3 t, Transform cam, float strength)
     {
         //throwed = true;
+        _strength = strength;
         target = t;
         Vector3 dir = cam.forward;
         _rigidbody.AddForce(dir * speed, ForceMode.Impulse);

@@ -77,7 +77,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   weapon: 
   item: health
+  cureAmount: 30
   speed: 10
+  restore: 0
+  restoreSeconds: 30
 --- !u!1001 &5505062326298839595
 PrefabInstance:
   m_ObjectHideFlags: 0
